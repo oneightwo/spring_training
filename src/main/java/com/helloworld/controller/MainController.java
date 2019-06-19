@@ -2,6 +2,7 @@ package com.helloworld.controller;
 
 import com.helloworld.dao.UserDao;
 import com.helloworld.model.User;
+import com.helloworld.service.UserService;
 import com.helloworld.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,8 +17,7 @@ import javax.validation.Valid;
 public class MainController {
 
     @Autowired
-    @Qualifier("jpaUserDao")
-    private UserDao userDao;
+    private UserService userService;
 
     @Autowired
     private UserValidator userValidator;
@@ -36,7 +36,7 @@ public class MainController {
 
     @GetMapping("/users")
     public String getUsers(Model model) {
-        model.addAttribute("users", userDao.getAll());
+        model.addAttribute("users", userService.getAll());
         return "/users";
     }
 
@@ -52,7 +52,7 @@ public class MainController {
         if (result.hasErrors()) {
             return "/sign_up";
         }
-        userDao.add(user);
+        userService.add(user);
         return "redirect:/users";
     }
 }
