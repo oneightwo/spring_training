@@ -1,4 +1,4 @@
-package com.helloworld;
+package com.helloworld.controller;
 
 import com.helloworld.dao.UserDao;
 import com.helloworld.model.User;
